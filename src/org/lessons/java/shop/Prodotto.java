@@ -12,7 +12,7 @@ public class Prodotto {
 	
 	public Prodotto(String nome, String descrizione, double prezzo, int iva) {
 		Random rnd = new Random();
-		int codice = rnd.nextInt();
+		int codice = rnd.nextInt(999999999);
 		
 		setCodice(codice);
 		setNome(nome);
@@ -70,6 +70,6 @@ public class Prodotto {
 	
 	@Override
 	public String toString() {
-		return "Prodotto: " + codice + " - " + nome;
+		return "Prodotto: " + getCodice() + " - " + getNome();
 	}
 }
