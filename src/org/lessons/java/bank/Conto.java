@@ -1,23 +1,25 @@
 package org.lessons.java.bank;
 
+import java.util.Random;
+
 public class Conto {
 	private int numero_conto;
 	private String nome_proprietario;
-	private double saldo = 0;
+	private int saldo;
 	
-	public Conto(int numero_conto, String nome_proprietario) {
-		setNumeroConto(numero_conto);
+	public Conto(String nome_proprietario) {
+		
+		Random rnd = new Random();
+		
+		numero_conto = rnd.nextInt(0, 1001);
 		setNomeProprietario(nome_proprietario);
-		setSaldo(saldo);
+		saldo = 0;
 	}
 	
 	public int getNumeroConto() {
 		return numero_conto;
 	}
 	
-	private void setNumeroConto(int numero_conto) {
-		this.numero_conto = numero_conto;
-	}
 	
 	public String getNomeProprietario() {
 		return nome_proprietario;
@@ -27,21 +29,29 @@ public class Conto {
 		this.nome_proprietario = nome_proprietario;
 	}
 	
-	public double getSaldo() {
+	public int getSaldo() {
 		return saldo;
 	}
 	
-	private void setSaldo(double saldo) {
-		this.saldo = saldo;
+	public String getFormatted() {
+		return String.format(".%2d", getSaldo());
 	}
 	
-	public double getMoney(double money) {
-		this.saldo -= money;
-		return money;
+	public boolean getMoney(int money) {
+		if(money < 0) return false;
+		
+		if(money <= saldo) {
+			saldo -= money;
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
-	public double payMoney(double money) {
-		this.saldo += money;
-		return this.saldo;
+	public void payMoney(int money) {
+		if(money < 0) return;
+		
+		saldo += money;
 	}
 }
